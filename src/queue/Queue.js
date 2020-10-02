@@ -30,7 +30,7 @@ class Queue {
       return;
     }
     const node = this.first;
-    this.first = this.prev;
+    this.first = node.prev;
 
     if (node === this.last) {
       this.last = null;
@@ -39,28 +39,35 @@ class Queue {
     return node.value;
   }
 
-  showFirst() {
-    if (!this.first) {
-      return null;
-    }
-    return this.first.value
-  }
-
-  showAll() {
-    const array = [];
-    if(!this.first) {
-      return []
-    }
-
-    let current = this.first;
-
-    while(current.prev !== null){
-      array.push(current.value);
-      current = current.prev;
-    }
-    array.push(current.value)
-    return array;
-  }
 }
 
-module.exports = Queue
+peek(q) {
+  if (!q.first) {
+    return null;
+  }
+  return q.first.value
+}
+
+readQue(q) {
+  const array = [];
+  if(!q.first) {
+    return []
+  }
+
+  let current = q.first;
+
+  while(current.prev !== null){
+    array.push(current.value);
+    current = current.prev;
+  }
+  array.push(current.value)
+  return array;
+}
+
+
+
+module.exports = {
+  Queue,
+  peek,
+  readQue
+}
