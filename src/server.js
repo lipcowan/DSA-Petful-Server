@@ -17,7 +17,7 @@ seedQue(dogQ, dogs)
 const app = express()
 
 app.use(cors({
-  origin: CLIENT
+  origin: CLIENT_ORIGIN
 }))
 
 setTimeout(() => {
