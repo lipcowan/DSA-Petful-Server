@@ -26,11 +26,12 @@ setTimeout(() => {
 }, 2500)
 
 app.get('/api/cats/queue', (req, res, next) => {
-  res.status(200).json(readQue(catQ))
+  res.json(readQue(catQ))
+  console.log(cats)
 })
 
 app.get('/api/dogs/queue', (req, res, next) => {
-  res.status(200).json(readQue(dogsQ))
+  res.json(readQue(dogQ))
 })
 
 app.delete('/api/cats/adopt', (req, res, next) => {

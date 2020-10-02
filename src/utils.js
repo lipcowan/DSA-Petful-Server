@@ -1,8 +1,4 @@
 const faker = require('faker')
-const { cats, dogs } = require('./store')
-const { Queue, peek, readQue } = require('./queue/Queue')
-
-const [catQue, dogQue] = [new Queue(), new Queue()]
 
 function random(a) {
     const rand = Math.floor(Math.random() * a.length)
@@ -17,14 +13,14 @@ function random(a) {
 }
 
 function seedQue(que, arr) {
-    if(que.first !== null) {
+    if(que.first === null) {
         const randClient = random(arr)
         for(let i=0; i < arr.length; i++) {
             if(randClient === i) {
                 arr[i].adopter = null
                 que.enqueue(arr[i])
             } else {
-                arr[i].adopter = `${faker.name.first()} ${faker.name.lastName()}`
+                arr[i].adopter = `${faker.name.firstName()} ${faker.name.lastName()}`
                 que.enqueue(arr[i])
             }
         }
