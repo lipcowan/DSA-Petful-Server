@@ -4,7 +4,7 @@ const cors = require('cors')
 const { cats, dogs } = require('./store')
 const { Queue, readQue } = require('./queue/Queue')
 const { seedQue, startCatInterval, startDogInterval } = require('./utils')
-const { PORT, CLIENT_ORIGIN } = require('./config')
+const { PORT } = require('./config')
 
 const [catQ, dogQ] = [new Queue(), new Queue()]
 
@@ -16,9 +16,7 @@ seedQue(dogQ, dogs)
 
 const app = express()
 
-app.use(cors({
-  origin: CLIENT_ORIGIN
-}))
+app.use(cors())
 
 setTimeout(() => {
   startCatInterval(catQ, 5000)
