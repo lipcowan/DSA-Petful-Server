@@ -1,6 +1,6 @@
 const faker = require('faker')
 const { cats, dogs } = require('./store')
-const Queue = require('./queue/Queue')
+const { Queue, peek, readQue } = require('./queue/Queue')
 
 const [catQue, dogQue] = [new Queue(), new Queue()]
 

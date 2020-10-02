@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 
 const { cats, dogs } = require('./store')
-const { Queue, readQue, peek } = require('./queue/Queue')
+const { Queue, readQue } = require('./queue/Queue')
 const { seedQue, startCatInterval, startDogInterval } = require('./utils')
 const { PORT, CLIENT } = require('./config')
 

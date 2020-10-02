@@ -5,6 +5,9 @@ class _Node {
     this.prev = null;
   }
 }
+function createNode(value = null, next = null, prev = null) {
+  return { value, next, prev }
+}
 
 class Queue {
   constructor() {
@@ -13,7 +16,7 @@ class Queue {
   }
 
   enqueue(data) {
-    const node = new _Node(data);
+    const node = createNode(data);
     if (this.last) {
       node.next = this.last
       this.last.prev = node
@@ -41,14 +44,14 @@ class Queue {
 
 }
 
-peek(q) {
+function peek(q) {
   if (!q.first) {
     return null;
   }
   return q.first.value
 }
 
-readQue(q) {
+function readQue(q) {
   const array = [];
   if(!q.first) {
     return []
