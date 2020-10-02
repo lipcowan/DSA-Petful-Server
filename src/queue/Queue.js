@@ -1,7 +1,8 @@
 class _Node {
-  constructor(value, next) {
+  constructor(value, next, prev) {
     this.value = value;
     this.next = null;
+    this.prev = null;
   }
 }
 
@@ -14,12 +15,14 @@ class Queue {
   enqueue(data) {
     const node = new _Node(data);
     if (this.last) {
-      this.last.next = node;
+      node.next = this.last
+      this.last.prev = node
     }
-    if (!this.first) {
+    this.last = node
+
+    if (this.first === null) {
       this.first = node;
     }
-    this.last = node;
   }
 
   dequeue() {
@@ -27,7 +30,7 @@ class Queue {
       return;
     }
     const node = this.first;
-    this.first = this.first.next;
+    this.first = this.prev;
 
     if (node === this.last) {
       this.last = null;
@@ -45,11 +48,17 @@ class Queue {
 
   showAll() {
     const array = [];
-    let current = this.first;
-    while(current){
-      array.push(current.value);
-      current = current.next;
+    if(!this.first) {
+      return []
     }
+
+    let current = this.first;
+
+    while(current.prev !== null){
+      array.push(current.value);
+      current = current.prev;
+    }
+    array.push(current.value)
     return array;
   }
 }
