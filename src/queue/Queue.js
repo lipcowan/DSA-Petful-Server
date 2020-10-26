@@ -1,76 +1,57 @@
-class _Node {
-  constructor(value, next, prev) {
-    this.value = value;
-    this.next = null;
-    this.prev = null;
-  }
-}
-function createNode(value = null, next = null, prev = null) {
-  return { value, next, prev }
-}
+const Node = require('./Node')
 
 class Queue {
   constructor() {
-    this.first = null;
-    this.last = null;
+    this.first = null
+    this.last = null
   }
 
   enqueue(data) {
-    const node = createNode(data);
-    if (this.last) {
-      node.next = this.last
-      this.last.prev = node
+    const node = new Node(data)
+    if(this.first === null) {
+      this.first = node
+    }
+    if(this.last) {
+      this.last.next = node
     }
     this.last = node
-
-    if (this.first === null) {
-      this.first = node;
-    }
   }
 
   dequeue() {
-    if (!this.first) {
-      return;
-    }
-    const node = this.first;
-    this.first = node.prev;
-
-    if (node === this.last) {
-      this.last = null;
+    if(this.first === null) {
+      return 
     }
 
-    return node.value;
+    const node = this.first
+
+    if(this.last === node) {
+      this.last = null
+    }
+
+    this.first = this.first.next
+
+    return node.value
   }
 
-}
+  show() {
+    if(this.first === null) {
+      return 
+    }
 
-function peek(q) {
-  if (!q.first) {
-    return null;
-  }
-  return q.first.value
-}
-
-function readQue(q) {
-  const array = [];
-  if(!q.first) {
-    return []
+    return this.first.value
   }
 
-  let current = q.first;
+  all() {
+    const allPets = []
+    let node = this.first
+    while(node) {
+      allPets.push(node.value)
+      node = node.next
+    }
 
-  while(current.prev !== null){
-    array.push(current.value);
-    current = current.prev;
+    return allPets
+  
   }
-  array.push(current.value)
-  return array;
 }
 
-
-
-module.exports = {
-  Queue,
-  peek,
-  readQue
-}
+module.exports = Queue
