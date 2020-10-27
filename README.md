@@ -24,7 +24,7 @@ This API provides a list of cats or dogs up for adoption along with a list of pe
 
 ## Live App and Repos
 
-* [Hosted Live on Vercel](...)
+* [Hosted Live on Vercel](https://dsa-petful-client-zeta.vercel.app)
 * [Client Repo](https://github.com/lipcowan/DSA-Petful-Client)
 * [Server Repo](https://github.com/lipcowan/DSA-Petful-Server)
 
