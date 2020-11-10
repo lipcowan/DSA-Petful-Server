@@ -7,14 +7,22 @@ const router = express.Router()
 router.get('/', (req, res) => {
   // Return all the people currently in the queue.
   const people = People.get()
-  return res.status(200).send(people)
+  if(!people) {
+    res.status(400).json({error: {message: 'No people in list'}})
+  } else {
+    res.status(200).send(people)
+  }
 })
 
 router.post('/', json, (req, res) => {
   // Add a new person to the queue.
   const { name } = req.body
-  People.enqueue(name)
-  return res.status(201).json(name)
+  try {
+    People.enqueue(name)
+    res.status(201).json(People.get())
+  } catch(error) {
+    res.status(400).json(error.message)
+  }
 })
 
 router.delete('/', json, (req, res) => {

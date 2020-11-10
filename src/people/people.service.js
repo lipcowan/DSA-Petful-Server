@@ -22,6 +22,9 @@ module.exports = {
 
   dequeue() {
     // Remove a person from the queue.
+    if(people.first === null) {
+      throw new Error('No more people')
+    }
     return people.dequeue()
   }
 }

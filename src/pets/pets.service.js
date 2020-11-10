@@ -17,17 +17,25 @@ store.dogs.forEach(dog => pets.dogs.enqueue(dog))
 module.exports = {
   get() {
     // Return the pets next in line to be adopted.
-    let cat = pets.cats.all()
-    let dog = pets.dogs.all()
-
-    return {
-      cat,
-      dog
-    }
+    return [[...pets.cats.all()], [...pets.dogs.all()]];
   },
 
   dequeue(type) {
     // Remove a pet from the queue.
-    return pets[type].dequeue()
+    if(type === 'cat') {
+      let cat = pets.cats.dequeue();
+      pets.cats.enqueue(cat);
+    } else if(type === 'dog') {
+      let dog = pets.dogs.dequeue();
+      pets.dogs.enqueue(dog)
+    } else if(type === 'both') {
+      let cat = pets.cats.dequeue();
+      let dog = pets.dogs.dequeue();
+      pets.cats.enqueue(cat);
+      pets.dogs.enqueue(dog);
+    } else {
+      throw new Error({error: {message: `${type} is not a valid type. 'cat' or 'dog' only.`}})
+    }
+    return false;
   }
 }
